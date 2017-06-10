@@ -17,7 +17,7 @@ fail_after_rebase=0
 function exit_if_error {
   if [ ${1} -ne 0 ]; then
     echo -e "\n${SEP}${RED}!!!FAILED!!!${NC}\n"
-    if [ fail_after_rebase -ne 0 ]; then
+    if [ ${fail_after_rebase} -ne 0 ]; then
       echo -e "\nPlease resolve above conflicts, then continue with\n${0} ${*} --continue\n"
     fi
     exit ${1}
@@ -42,6 +42,11 @@ fi
 
 if [ "${origin}" = "" ]; then
   origin="origin"
+fi
+
+if [ "${origin}" = "--continue" ]; then
+  origin="origin"
+  continue="--continue"
 fi
 
 if [ "${continue}" = "" ]; then
@@ -74,16 +79,13 @@ if [ "${continue}" = "" ]; then
 
 fi
 
-echo -e "\n${SEP}Push changes ${origin}"
-git push ${origin}
-exit_if_error ${?}
-
-echo -e "\n${SEP}Remove remote ${origin} ${branch}"
+echo -e "\n${SEP}Remove old remote ${origin} ${branch}"
 git push ${origin} ":${branch}"
 exit_if_error ${?}
 
-echo -e "\n${SEP}Create new remove ${origin} ${branch}"
-git push --set-origin ${origin} ${branch}
+echo -e "\n${SEP}Create new remote ${origin} ${branch}"
+git checkout ${branch}
+git push --set-upstream ${origin} ${branch}
 exit_if_error ${?}
 
 echo -e "\n${SEP}Remove ${backup}"
