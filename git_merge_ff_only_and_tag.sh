@@ -59,7 +59,7 @@ echo -e "\n${SEP}Git push ${origin} ${branch}"
 git push ${origin} ${branch}
 exit_if_error ${?}
 
-echo -e "\n${SEP}Git branch to ${backup} before rebase"
+echo -e "\n${SEP}Git branch to ${backup} before merge"
 git branch ${backup}
 exit_if_error ${?}
 
@@ -71,7 +71,7 @@ echo -e "\n${SEP}Git pull ${origin} ${master}"
 git pull ${origin} ${master}
 exit_if_error ${?}
 
-echo -e "\n${SEP}Git branch to ${backup_master} before rebase"
+echo -e "\n${SEP}Git branch to ${backup_master} before merge"
 git branch ${backup_master}
 exit_if_error ${?}
 backup_master_done=1
