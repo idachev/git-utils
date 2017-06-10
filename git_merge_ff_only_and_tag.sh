@@ -88,25 +88,24 @@ echo -e "\n${SEP}Push tag ${origin} ${tag}"
 git push ${origin} ${tag}
 exit_if_error ${?}
 
-echo -e "\n${SEP}Remove remote ${origin} ${branch}"
-git push ${origin} ":${branch}"
-exit_if_error ${?}
-
 echo -e "\n${SEP}Push changes ${origin}"
 git push ${origin}
+exit_if_error ${?}
+
+echo -e "\n${SEP}Remove remote ${origin} ${branch}"
+git push ${origin} ":${branch}"
 exit_if_error ${?}
 
 echo -e "\n${SEP}Remove local ${branch}"
 git branch -d "${branch}"
 exit_if_error ${?}
 
-echo -e "\n${SEP}Remove backup ${backup}"
+echo -e "\n${SEP}Remove ${backup}"
 git branch -d "${backup}"
 exit_if_error ${?}
 
-echo -e "\n${SEP}Remove master backup ${backup_master}"
+echo -e "\n${SEP}Remove ${backup_master}"
 git branch -d "${backup_master}"
 exit_if_error ${?}
 
-echo -e "\n${SEP}${GREEN}ALL DONE${NC}"
-
+echo -e "\n${SEP}${GREEN}ALL DONE${NC}\n"
