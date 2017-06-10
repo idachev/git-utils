@@ -1,6 +1,7 @@
 #!/bin/bash
 #set -v
 
+backup_args="$*"
 branch="${1}"
 backup="backup-${branch}"
 master="${2}"
@@ -18,7 +19,7 @@ function exit_if_error {
   if [ ${1} -ne 0 ]; then
     echo -e "\n${SEP}${RED}!!!FAILED!!!${NC}\n"
     if [ ${fail_after_rebase} -ne 0 ]; then
-      echo -e "\nPlease resolve above conflicts, then continue with\n${0} ${*} --continue\n"
+      echo -e "\nPlease resolve above conflicts, then continue with\n${0} ${backup_args} --continue\n"
     fi
     exit ${1}
   fi
