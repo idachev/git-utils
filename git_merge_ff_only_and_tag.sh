@@ -2,7 +2,7 @@
 #set -v
 
 branch="${1}"
-tag="rebased-${branch}"
+tag="merged-${branch}"
 backup="backup-${branch}"
 master="${2}"
 backup_master="backup-${master}"
